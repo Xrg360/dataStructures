@@ -1,0 +1,11 @@
+Enter the number of terms in the first polynomial: 4
+4Enter the number of terms in the second polynomial: 4
+Enter the coefficient and exponent of the first polynomial: 7 5
+10 4
+3 2
+4 1
+Enter the coefficient and exponent of the second polynomial: 6 4
+1 3
+2 2 
+5 0
+The resultant polynomial is: 7x^5 + 16x^4 + 1x^3 + 5x^2 + 4x^1 + 5x^0 + 
