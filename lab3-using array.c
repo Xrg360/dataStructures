@@ -5,72 +5,76 @@ struct polynomial
 {
     int coeff;
     int exp;
-};
+}p[10],q[10],r[10];
 
 //array implementation method 1
 void main(){
     int i=0,j=0,k=0,n,m;
-    struct polynomial p[10],q[10],r[10];
     printf("Enter the number of terms in the first polynomial: ");
     scanf("%d", &n);
     printf("Enter the number of terms in the second polynomial: ");
     scanf("%d", &m);
     printf("Enter the coefficient and exponent of the first polynomial: ");
+    read(p,n);
+    printf("Enter the coefficient and exponent of the second polynomial: ");
+    read(q,m);
+    add(p,q,r,n,m);
+}
+void read(struct polynomial p[],int n){
+    int i;
     for (i = 0; i < n; i++)
     {
         scanf("%d%d", &p[i].coeff, &p[i].exp);
     }
-    printf("Enter the coefficient and exponent of the second polynomial: ");
-    for (j = 0; j < m; j++)
+}
+void add(){
+    int i=0,j=0,k=0;
+    while (i < n && j < m)
     {
-        scanf("%d%d", &q[j].coeff, &q[j].exp);
-    }
-    i=0;j=0;
-    while (i<m&&j<m)
-    {
-        if (p[i].exp==q[j].exp)
+        if (p[i].exp == q[j].exp)
         {
-            r[k].exp=p[i].exp;
-            r[k].coeff=p[i].coeff+q[j].coeff;
+            r[k].coeff = p[i].coeff + q[j].coeff;
+            r[k].exp = p[i].exp;
             i++;
-            j++;     
+            j++;
             k++;
         }
-        else if (p[i].exp>q[j].exp)
+        else if (p[i].exp > q[j].exp)
         {
-            r[k].exp=p[i].exp;
-            r[k].coeff=p[i].coeff;
+            r[k].coeff = p[i].coeff;
+            r[k].exp = p[i].exp;
             i++;
             k++;
         }
         else
         {
-            r[k].exp=q[j].exp;
-            r[k].coeff=q[j].coeff;
+            r[k].coeff = q[j].coeff;
+            r[k].exp = q[j].exp;
             j++;
             k++;
         }
     }
-    while (i<n)
+    while (i < n)
     {
-        r[k].exp=p[i].exp;
-        r[k].coeff=p[i].coeff;
+        r[k].coeff = p[i].coeff;
+        r[k].exp = p[i].exp;
         i++;
         k++;
     }
-    while (j<m)
+    while (j < m)
     {
-        r[k].exp=q[j].exp;
-        r[k].coeff=q[j].coeff;
+        r[k].coeff = q[j].coeff;
+        r[k].exp = q[j].exp;
         j++;
         k++;
     }
-    printf("The resultant polynomial is: ");
+    printf("The sum of the two polynomials is: ");
     for (i = 0; i < k; i++)
     {
-        if (r[i].coeff != 0)
+        printf("%dx^%d", r[i].coeff, r[i].exp);
+        if (i != k - 1)
         {
-            printf("%dx^%d + ", r[i].coeff, r[i].exp);
+            printf(" + ");
         }
     }
 }
