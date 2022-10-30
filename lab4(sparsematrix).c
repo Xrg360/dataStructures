@@ -40,11 +40,74 @@ void display(int x[10][10]){
         printf("\n");
     }
 }
+void sparse_add(){
+    if (a1[0][0] == b1[0][0] && a1[0][1] == b1[0][1])
+    {
+        printf("addition possible..");
+         i=1;
+         j=1;
+         k=1;
+        while (i<=a1[0][2] && j<=b1[0][2])
+        {
+            if (a1[i][0]<b1[j][0] || a1[i][1]<b1[j][1])
+            {
+                c1[k][0] = a1[i][0];
+                c1[k][1] = a1[i][1];
+                c1[k][2] = a1[i][2];
+                i++;
+                k++;
+            }
+            else if (a1[i][0]>b1[j][0] || a1[i][1]>b1[j][1])
+            {
+                c1[k][0] = b1[j][0];
+                c1[k][1] = b1[j][1];
+                c1[k][2] = b1[j][2];
+                j++;
+                k++;
+            }
+            else if (a1[i][1] == b1[j][1])
+            {
+                c1[k][0] = a1[i][0];
+                c1[k][1] = a1[i][1];
+                c1[k][2] = a1[i][2] + b1[j][2];
+                i++;
+                j++;
+                k++;
+            }
+            
+        }
+        while (i<=a1[0][2])
+        {
+            c1[k][0] = a1[i][0];
+            c1[k][1] = a1[i][1];
+            c1[k][2] = a1[i][2];
+            i++;
+            k++;
+        }
+        while (j<=b1[0][2])
+        {
+            c1[k][0] = b1[j][0];
+            c1[k][1] = b1[j][1];
+            c1[k][2] = b1[j][2];
+            j++;
+            k++;
+        }
+        c1[0][0] = a1[0][0];
+        c1[0][1] = a1[0][1];
+        c1[0][2] = k-1;
+        
+        
+    }
+    else
+        printf("not possible");
+    
+}
 void main(){
     scanf("%d",&r);
     scanf("%d",&c);
-    
+    printf("one\n");
     input(a);
+    printf("two\n");
     input(b);
     tup_conv(a,a1);
     tup_conv(b,b1);
@@ -52,9 +115,8 @@ void main(){
     display(a1);
     printf("tuple2\n");
     display(b1);
-    
-    
-
-    
+    printf("sum\n");
+    sparse_add();
+    display(c1); 
     
 }
