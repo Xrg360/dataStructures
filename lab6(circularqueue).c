@@ -65,7 +65,7 @@ void traverse(){
         
     }
 }
-int main(int argc, char const *argv[])
+int main()
 {
     int choice;
    while(1){
