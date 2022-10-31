@@ -18,9 +18,9 @@ int isEmpty(){
     else 
         return 0;
 }
-void push(int n,int p){
+void enQueue(int n,int p){
     if(isFull())
-        printf("queue full .. try popping some elements");
+        printf("queue full .. try deQueuing some elements");
     else{
         rear++;
         q[rear].data =  n;
@@ -33,7 +33,7 @@ void sort(){
     int t;
     for (int i = front; i <= rear; i++)
     {
-        for (int j = front; j <= rear-i; j++)
+        for (int j = front; j < rear; j++)
         {
             if(q[j].priority>q[j+1].priority){
                 t=q[j].data;
@@ -49,9 +49,9 @@ void sort(){
     }
     
 }
-void pop(){
+void deQueue(){
     if(isEmpty()){
-        printf("nothing here to pop");
+        printf("nothing here to deQueue");
     }
     else{
         sort();
@@ -82,21 +82,21 @@ int main()
 {
     int choice;
    while(1){
-        printf("\n1.Push\n2.Pop\n3.Trav\n choice : ");
+        printf("\n1.enQueue\n2.deQueue\n3.Traverse\n choice : ");
         scanf("%d",&choice);
         switch (choice)
         {
             case 1:
-                printf("Enter the number to push : ");
+                printf("Enter the number to enQueue : ");
                 int n;
                 scanf("%d",&n);
-                printf("Enter the priority to push : ");
+                printf("Enter the priority to enQueue : ");
                 int p;
                 scanf("%d",&p);
 
-                push(n,p);
+                enQueue(n,p);
                 break;
-            case 2: pop();
+            case 2: deQueue();
                     break;
             case 3: traverse();
                     break;

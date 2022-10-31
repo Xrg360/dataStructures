@@ -15,7 +15,7 @@ int isEmpty(){
 }
 void enQueue(int n){
     if(isFull())
-        printf("queue full .. try popping some elements");
+        printf("queue full .. try deQueueping some elements");
     else{
         rear++;
         q[rear] =  n;
@@ -25,7 +25,7 @@ void enQueue(int n){
 }
 void deQueue(){
     if(isEmpty()){
-        printf("nothing here to pop");
+        printf("nothing here to deQueue");
     }
     else{
         int item = q[front];
@@ -52,12 +52,12 @@ int main(int argc, char const *argv[])
 {
     int choice;
    while(1){
-        printf("\n1.Push\n2.Pop\n3.Trav\n choice : ");
+        printf("\n1.enQueue\n2.deQueue\n3.Trav\n choice : ");pop
         scanf("%d",&choice);
         switch (choice)
         {
             case 1:
-                printf("Enter the number to push : ");
+                printf("Enter the number to enQueue : ");
                 int n;
                 scanf("%d",&n);
                 enQueue(n);
