@@ -13,7 +13,7 @@ int isEmpty(){
     else 
         return 0;
 }
-void push(int n){
+void enQueue(int n){
     if(isFull())
         printf("queue full .. try popping some elements");
     else{
@@ -23,7 +23,7 @@ void push(int n){
             front ++;
     }
 }
-void pop(){
+void deQueue(){
     if(isEmpty()){
         printf("nothing here to pop");
     }
@@ -77,9 +77,9 @@ int main()
         printf("Enter the number to push : ");
         int n;
         scanf("%d",&n);
-        push(n);
+        enQueue(n);
         break;
-    case 2: pop();
+    case 2: deQueue();
             break;
     case 3: traverse();
             break;

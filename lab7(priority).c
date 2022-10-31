@@ -1,6 +1,11 @@
 #include<stdio.h>
 #define MAX 5
-int q[10],front =-1,rear =-1;
+struct queue
+{
+    int data;
+    int priority;
+}q[MAX];
+int front =-1,rear =-1;
 int isFull(){
     if(rear == MAX-1)
         return 1;
@@ -13,34 +18,59 @@ int isEmpty(){
     else 
         return 0;
 }
-void enQueue(int n){
+void push(int n,int p){
     if(isFull())
         printf("queue full .. try popping some elements");
     else{
         rear++;
-        q[rear] =  n;
+        q[rear].data =  n;
+        q[rear].priority = p;
         if(front == -1)
             front ++;
     }
 }
-void deQueue(){
+void sort(){
+    int t;
+    for (int i = front; i <= rear; i++)
+    {
+        for (int j = front; j <= rear-i; j++)
+        {
+            if(q[j].priority>q[j+1].priority){
+                t=q[j].data;
+                q[j].data = q[j+1].data;
+                q[j+1].data = t;
+
+                t=q[j].priority;
+                q[j].priority = q[j+1].priority;
+                q[j+1].priority = t;
+            }
+        }
+        
+    }
+    
+}
+void pop(){
     if(isEmpty()){
         printf("nothing here to pop");
     }
     else{
-        int item = q[front];
-        printf("%d is going to be deleted...",item);
-        front++;
-        if(front > rear){
-            front = -1;
-            rear = -1;
+        sort();
+        int item = q[front].data;
+        printf("%d is going to be deleted..",item);
+        front ++;
+        if (front>rear)
+        {
+            front =-1;
+            rear =-1;
         }
     }
+    
 }
 void traverse(){
     if(isEmpty())
         printf("nothing much to display");
     else{
+            sort();
             for (int i = front; i <= rear; i++)
             {
                 printf("%d ",q[i]);
@@ -48,7 +78,7 @@ void traverse(){
         
     }
 }
-int main(int argc, char const *argv[])
+int main()
 {
     int choice;
    while(1){
@@ -60,9 +90,13 @@ int main(int argc, char const *argv[])
                 printf("Enter the number to push : ");
                 int n;
                 scanf("%d",&n);
-                enQueue(n);
+                printf("Enter the priority to push : ");
+                int p;
+                scanf("%d",&p);
+
+                push(n,p);
                 break;
-            case 2: deQueue();
+            case 2: pop();
                     break;
             case 3: traverse();
                     break;
