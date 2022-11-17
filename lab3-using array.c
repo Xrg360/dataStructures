@@ -6,21 +6,21 @@ struct polynomial
     int coeff;
     int exp;
 }p[10],q[10],r[10];
-
+int n,m;
 //array implementation method 1
 void main(){
-    int i=0,j=0,k=0,n,m;
+    int i=0,j=0,k=0;
     printf("Enter the number of terms in the first polynomial: ");
     scanf("%d", &n);
     printf("Enter the number of terms in the second polynomial: ");
     scanf("%d", &m);
     printf("Enter the coefficient and exponent of the first polynomial: ");
-    read(p,n);
+    read_poly(p,n);
     printf("Enter the coefficient and exponent of the second polynomial: ");
     read(q,m);
     add(p,q,r,n,m);
 }
-void read(struct polynomial p[],int n){
+void read_poly(struct polynomial p[],int n){
     int i;
     for (i = 0; i < n; i++)
     {

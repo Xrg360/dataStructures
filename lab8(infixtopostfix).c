@@ -1,6 +1,5 @@
 #include<stdio.h>
 #include<ctype.h>
-#include<string.h>
 
 char stack[100];
 int top = -1;

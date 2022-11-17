@@ -103,11 +103,11 @@ void sparse_add(){
     
 }
 void main(){
-    scanf("%d",&r);
-    scanf("%d",&c);
-    printf("one\n");
+    printf("enter the rows and columns :")
+    scanf("%d %d",&r,&c);
+    printf("first matrix\n");
     input(a);
-    printf("two\n");
+    printf("second matrix\n");
     input(b);
     tup_conv(a,a1);
     tup_conv(b,b1);
