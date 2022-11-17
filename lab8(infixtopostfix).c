@@ -36,24 +36,23 @@ int main()
     printf("Enter the expression : ");
     scanf("%s",exp);
     printf("\n");
-    strcpy(e,exp);
-    int i=0;
-    while(e[i] != '\0')
+   int i=0;
+    while(exp[i] != '\0')
     {
-        if(isalnum(e[i]))
-            printf("%c ",e[i]);
-        else if(e[i] == '(')
-            push(e[i]);
-        else if(e[i] == ')')
+        if(isalnum(exp[i]))
+            printf("%c ",exp[i]);
+        else if(exp[i] == '(')
+            push(exp[i]);
+        else if(exp[i] == ')')
         {
             while((x = pop()) != '(')
                 printf("%c ", x);
         }
         else
         {
-            while(priority(stack[top]) >= priority(e[i]))
+            while(priority(stack[top]) >= priority(exp[i]))
                 printf("%c ",pop());
-            push(e[i]);
+            push(exp[i]);
         }
         i++;
     }
