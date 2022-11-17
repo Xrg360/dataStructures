@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<ctype.h>
+#include<string.h>
 
 char stack[100];
 int top = -1;
@@ -31,30 +32,30 @@ int priority(char x)
 int main()
 {
     char exp[100];
-    char *e, x;
+    char e[100], x;
     printf("Enter the expression : ");
     scanf("%s",exp);
     printf("\n");
-    e = exp;
-    
-    while(*e != '\0')
+    strcpy(e,exp);
+    int i=0;
+    while(e[i] != '\0')
     {
-        if(isalnum(*e))
-            printf("%c ",*e);
-        else if(*e == '(')
-            push(*e);
-        else if(*e == ')')
+        if(isalnum(e[i]))
+            printf("%c ",e[i]);
+        else if(e[i] == '(')
+            push(e[i]);
+        else if(e[i] == ')')
         {
             while((x = pop()) != '(')
                 printf("%c ", x);
         }
         else
         {
-            while(priority(stack[top]) >= priority(*e))
+            while(priority(stack[top]) >= priority(e[i]))
                 printf("%c ",pop());
-            push(*e);
+            push(e[i]);
         }
-        e++;
+        i++;
     }
     
     while(top != -1)
