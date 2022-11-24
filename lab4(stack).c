@@ -30,9 +30,6 @@ void pop(){
         int item = s[top];
         printf("%d is going to be deleted...",item);
         top--;
-        if(top == MAX){
-           top =-1;
-        }
     }
 }
 void traverse(){

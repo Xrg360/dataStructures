@@ -43,7 +43,7 @@ void display(int x[10][10]){
 void sparse_add(){
     if (a1[0][0] == b1[0][0] && a1[0][1] == b1[0][1])
     {
-        printf("addition possible..");
+        printf("addition possible..\n");
          i=1;
          j=1;
          k=1;
@@ -103,7 +103,7 @@ void sparse_add(){
     
 }
 void main(){
-    printf("enter the rows and columns :")
+    printf("enter the rows and columns :");
     scanf("%d %d",&r,&c);
     printf("first matrix\n");
     input(a);
