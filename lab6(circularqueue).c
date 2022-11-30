@@ -30,11 +30,12 @@ void deQueue(){
     else{
         int item = q[front];
         printf("%d is going to be deleted...",item);
-        front = (front+1)%MAX;
+        
         if(front == rear){
             front = -1;
             rear = -1;
         }
+        front = (front+1)%MAX;
     }
 }
 void traverse(){
