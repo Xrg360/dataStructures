@@ -6,53 +6,58 @@ struct node
 {
     int data;
     struct node *next;
-}*top, *temp, *head;
+}*front, *temp, *rear, *head;
 
 int isEmpty(){
-    if (top == NULL)
+    if (front == NULL)
         return 1;
     return 0;
 }
 int isFull(){
-    if(count == MAX-1)
+    if(count == MAX)
         return 1;
     return 0;
 }
-void push(int x){
+void enQueue(int x){
     if (isFull())
-        printf("stack overflow");
+        printf("queue full");
     else{
         count++;
         head = (struct node *)malloc(sizeof(struct node *));
         head->data = x;
+        head->next = NULL;
         if (isEmpty())
         {
-            top = head;
-            head->next = NULL;
+            front = head;
+            rear  = head;
 
         }
         else{
-            head->next = top;
-            top = head;
+            rear->next = head;
+            rear = head;
         }
         
     }
     
 }
-void pop(){
+void deQueue(){
     if (isEmpty())
         printf("stack underflow");
+    else if(front == rear){
+        front = NULL;
+        rear = NULL;
+
+    }
     else{
-            temp = top;
-            printf("%d is going to be deleted...",temp->data);
-            top = top->next;
+            temp = front;
+            front = front->next;
             free(temp);
             count--;
     }
     
 }
 void traverse(){
-    temp = top;
+    temp = front;
     if (isEmpty())
     {
         printf("nothing here to display...");
@@ -72,16 +77,16 @@ void main(){
     int choice,n;
     do
     {
-        printf("\n\n1.Push\n2.Pop\n3.Traverse\nchoice : ");
+        printf("\n\n1.enQueue\n2.deQueue\n3.Traverse\nchoice : ");
         scanf("%d",&choice);
         switch (choice)
         {
         case 1:
-                printf("enter the value to push : ");
+                printf("enter the value to enQueue : ");
                 scanf("%d",&n);
-                push(n);
+                enQueue(n);
                 break;
-        case 2: pop();
+        case 2: deQueue();
                 break;
         case 3: traverse();
                 break;
