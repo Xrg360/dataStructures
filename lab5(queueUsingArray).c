@@ -52,7 +52,7 @@ int main(int argc, char const *argv[])
 {
     int choice;
    while(1){
-        printf("\n1.enQueue\n2.deQueue\n3.Trav\n choice : ");pop
+        printf("\n1.enQueue\n2.deQueue\n3.Trav\n choice : ");
         scanf("%d",&choice);
         switch (choice)
         {
