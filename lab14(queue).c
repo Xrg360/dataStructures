@@ -5,53 +5,59 @@ struct node
 {
     int data;
     struct node *next;
-}*newnode,*top,*temp;
-
-
-int count=0;
-void push(int a) //push is essentially inserting the newnode to the beginning of the linked list
-{
+}*newnode,*front,*rear,*temp;
+int count = 0;
+void enQueue(int a){
     newnode = (struct node *)malloc(sizeof(struct node));
     newnode->data = a;
     if (count == MAX_SIZE)           //checking the full condition
     {
-        printf("Stack overflow..");
+        printf("queue full..");
     }
-    else if (top == NULL)
+    else if (front == NULL)
     {
-       top = newnode;
+       front = newnode;
+       rear = newnode;
        newnode->next = NULL;
        count++;                //to check whether the stack has reached to the MAX_SIZE
-       printf("node pushed successfully..");
+       printf("node enQueued successfully..");
     }
     else{
-        newnode->next = top;
-        top = newnode; 
+        newnode->next = front;
+        front = newnode; 
         count++;
-        printf("node pushed successfully..");
+        printf("node enQueued successfully..");
     }
 }
-void pop(){
-    if (top == NULL)
+void deQueue(){
+    if (front == NULL)
     {
-        printf("stack underflow..");
-    }
-    else{
-        temp = top;
-        top = top->next;
-        free(temp);
-        count --;
-        printf("node popped succesfully..");    
+        printf("nothing here to delete...")
     }
     
+    temp = front;
+    if (front == rear)
+    {
+        front = NULL;
+        rear = NULL;
+    }
+    
+    while (temp->next != rear)
+    {
+        temp = temp->next;
+    }
+    temp->next = NULL;
+    free(rear);
+    rear =  temp;
+    printf("node deQueued succesfully");
 }
 void traverse(){
-    if (top == NULL)
+    if (front == NULL)
     {
         printf("nothing here to display..");
     }
     else{
-        temp = top;
+        temp = front;
         while (temp->next!=NULL)
         {
             printf("%d -> ",temp->data);
@@ -60,21 +66,20 @@ void traverse(){
         printf("%d",temp->data);
     }
 }
-void main()
-{
+void main(){
     int ch,data;
      do{
-    printf("\n\n1.PUSH\n2.POP\n3.TRAVERSE\n");
+    printf("\n1.enQueue\n2.deQueue\n3.Traverse\n");
     scanf("%d",&ch);
         switch (ch)
         {
         case 1:
             printf("enter the number : ");
             scanf("%d",&data);
-            push(data);
+            enQueue(data);
             break;
         case 2:
-            pop();
+            deQueue();
             break;
         case 3:
             
@@ -87,4 +92,3 @@ void main()
         scanf("%d",&ch);
     }while(ch!=0);
 }
-
