@@ -32,7 +32,7 @@ void enQueue(int a){
 void deQueue(){
     if (front == NULL)
     {
-        printf("nothing here to delete...")
+        printf("nothing here to delete...");
     }
     
     temp = front;
