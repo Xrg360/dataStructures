@@ -1,0 +1,310 @@
+#include<stdio.h>  
+#include<stdlib.h>  
+struct node   
+{  
+    int data;  
+    struct node *next;   
+};  
+struct node *start;  
+  
+void beginsert ();   
+void lastinsert ();  
+void randominsert();  
+void begin_delete();  
+void last_delete();  
+void random_delete();  
+void display();  
+void search();  
+void main ()  
+{  
+    int choice =0;  
+    while(choice != 7)   
+    {  
+        printf("\n*********Main Menu*********\n");  
+        printf("\nChoose one option from the following list ...\n");  
+        printf("\n===============================================\n");  
+        printf("\n1.Insert in begining\n2.Insert at last\n3. Insert after specified data\n4.Delete from Beginning\n5.Delete from last\n6.Delete a specified data\n7.Search for an element\n8.Show\n0.Exit\n");  
+        printf("\nEnter your choice?\n");         
+        scanf("\n%d",&choice);  
+        switch(choice)  
+        {  
+            case 1:  
+            beginsert();      
+            break;  
+            case 2:  
+            lastinsert();         
+            break;  
+            case 3:
+            specifiedInsert();
+            break;
+            case 4:  
+            begin_delete();       
+            break;  
+            case 5:  
+            last_delete();        
+            break;  
+            case 6:
+            specifiedDelete();
+            break;
+            case 7:  
+            search();         
+            break;  
+            case 8:  
+            display();        
+            break;  
+            case 0:  
+            exit(0);  
+            break;  
+            default:  
+            printf("Please enter valid choice..");  
+        }  
+    }  
+}  
+void beginsert()  
+{  
+    struct node *ptr,*temp;   
+    int item;   
+    ptr = (struct node *)malloc(sizeof(struct node));  
+    if(ptr == NULL)  
+    {  
+        printf("\nOVERFLOW");  
+    }  
+    else   
+    {  
+        printf("\nEnter the node data?");  
+        scanf("%d",&item);  
+        ptr -> data = item;  
+        if(start == NULL)  
+        {  
+            start = ptr;  
+            ptr -> next = start;  
+        }  
+        else   
+        {     
+            temp = start;  
+            while(temp->next != start)  
+                temp = temp->next;  
+            ptr->next = start;   
+            temp -> next = ptr;   
+            start = ptr;  
+        }   
+        printf("\nnode inserted\n");  
+    }  
+              
+}  
+void lastinsert()  
+{  
+    struct node *ptr,*temp;   
+    int item;  
+    ptr = (struct node *)malloc(sizeof(struct node));  
+    if(ptr == NULL)  
+    {  
+        printf("\nOVERFLOW\n");  
+    }  
+    else  
+    {  
+        printf("\nEnter Data?");  
+        scanf("%d",&item);  
+        ptr->data = item;  
+        if(start == NULL)  
+        {  
+            start = ptr;  
+            ptr -> next = start;    
+        }  
+        else  
+        {  
+            temp = start;  
+            while(temp -> next != start)  
+            {  
+                temp = temp -> next;  
+            }  
+            temp -> next = ptr;   
+            ptr -> next = start;  
+        }  
+          
+        printf("\nnode inserted\n");  
+    }  
+  
+}  
+  
+void begin_delete()  
+{  
+    struct node *ptr;   
+    if(start == NULL)  
+    {  
+        printf("\nUNDERFLOW");    
+    }  
+    else if(start->next == start)  
+    {  
+        start = NULL;  
+        free(start);  
+        printf("\nnode deleted\n");  
+    }  
+      
+    else  
+    {   ptr = start;   
+        while(ptr -> next != start)  
+            ptr = ptr -> next;   
+        ptr->next = start->next;  
+        free(start);  
+        start = ptr->next;  
+        printf("\nnode deleted\n");  
+  
+    }  
+}  
+void last_delete()  
+{  
+    struct node *ptr, *preptr;  
+    if(start==NULL)  
+    {  
+        printf("\nUNDERFLOW");  
+    }  
+    else if (start ->next == start)  
+    {  
+        start = NULL;  
+        free(start);  
+        printf("\nnode deleted\n");  
+  
+    }  
+    else   
+    {  
+        ptr = start;  
+        while(ptr ->next != start)  
+        {  
+            preptr=ptr;  
+            ptr = ptr->next;  
+        }  
+        preptr->next = ptr -> next;  
+        free(ptr);  
+        printf("\nnode deleted\n");  
+  
+    }  
+}  
+
+void specifiedInsert(){
+    struct node *curr,*ptr;
+    int item ,ofdata;
+    ptr = (struct node *)malloc(sizeof(struct node));
+    printf("enter the data : ");
+    scanf("%d",&item);
+    printf("enter the data after which the data to be inserted : ");
+    scanf("%d",&ofdata);
+    if (start == NULL)
+    {
+        printf("insertion not possible...!");
+    }
+    else if (start->data == ofdata)
+    {
+        beginsert();
+    }
+    else{
+        curr = start;
+        while (curr->data!=ofdata||curr!=NULL)
+        {
+            curr = curr->next;
+        }
+        if (curr->data == ofdata)
+        {   
+            if (curr->next == NULL)
+            {
+                lastinsert();
+            }
+            else{
+                ptr->next = curr->next;
+                curr->next = ptr;
+            }
+        }
+        
+    }
+    printf("\nnode inserted\n");  
+}
+
+void specifiedDelete(){
+    struct node *preptr,*ptr;
+    ptr = start;
+    int ofdata;
+    printf("enter the data to be deleted : ");
+    scanf("%d",&ofdata);
+    while (ptr->data!=ofdata || ptr!=NULL)
+    {
+        preptr = ptr;
+        ptr = ptr->next;
+    }
+    if (ptr->data = ofdata)
+    {
+        preptr->next = ptr->next;
+        free(ptr);        
+    }
+    else{
+        printf("the node cannot be found...!");
+    }
+    
+    
+}
+  
+void search()  
+{  
+    struct node *ptr;  
+    int item,i=0,flag=1;  
+    ptr = start;   
+    if(ptr == NULL)  
+    {  
+        printf("\nEmpty List\n");  
+    }  
+    else  
+    {   
+        printf("\nEnter item which you want to search?\n");   
+        scanf("%d",&item);  
+        if(start ->data == item)  
+        {  
+        printf("item found at location %d",i+1);  
+        flag=0;  
+        }  
+        else   
+        {  
+        while (ptr->next != start)  
+        {  
+            if(ptr->data == item)  
+            {  
+                printf("item found at location %d ",i+1);  
+                flag=0;  
+                break;  
+            }   
+            else  
+            {  
+                flag=1;  
+            }  
+            i++;  
+            ptr = ptr -> next;  
+        }  
+        }  
+        if(flag != 0)  
+        {  
+            printf("Item not found\n");  
+        }  
+    }     
+          
+}  
+  
+void display()  
+{  
+    struct node *ptr;  
+    ptr=start;  
+    if(start == NULL)  
+    {  
+        printf("\nnothing to print");  
+    }     
+    else  
+    {  
+        printf("\n printing values ... \n");  
+          
+        while(ptr -> next != start)  
+        {  
+          
+            printf("%d\n", ptr -> data);  
+            ptr = ptr -> next;  
+        }  
+        printf("%d\n", ptr -> data);  
+    }  
+              
+}  
