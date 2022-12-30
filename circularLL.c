@@ -185,17 +185,12 @@ void specifiedInsert(){
     struct node *curr,*ptr;
     int item ,ofdata;
     ptr = (struct node *)malloc(sizeof(struct node));
-    printf("enter the data : ");
-    scanf("%d",&item);
+    
     printf("enter the data after which the data to be inserted : ");
     scanf("%d",&ofdata);
     if (start == NULL)
     {
         printf("insertion not possible...!");
-    }
-    else if (start->data == ofdata)
-    {
-        beginsert();
     }
     else{
         curr = start;

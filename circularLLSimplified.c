@@ -266,7 +266,7 @@ void main()
     inserte();
     else if(c==4)
     break;
-    elsed
+    else
     printf("Invalid Choice\n");
     
     }

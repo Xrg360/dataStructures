@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
-#define MAX_SIZE 5
+#define MAX_SIZE 3
 struct node
 {
     int data;
