@@ -9,12 +9,7 @@ void main(){
         scanf("%d",&a[i]);
     }
     do{
-        printf("Enter the choice\n
-        1.Insert\n
-        2.Delete\n
-        3.Sum\n
-        4.Display\n
-        5.Exit\n");
+        printf("Enter the choice\n1.Insert\n2.Delete\n3.Sum\n4.Display\n5.Exit\n");
         int ch;
         scanf("%d",&ch);
         switch(ch){

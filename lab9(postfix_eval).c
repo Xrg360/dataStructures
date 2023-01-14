@@ -27,6 +27,7 @@ void main(){
         
             push(num);
         }
+
         else
         {
             n1 = pop();

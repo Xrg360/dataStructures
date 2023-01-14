@@ -1,133 +1,132 @@
-#include<stdio.h>
-#include<stdlib.h>
-struct A
-{
-    int expo,coeff;
-    struct A *next;
-}*start1,*end1,*newnode1,*temp1;
-struct B
-{
-    int expo,coeff;
-    struct B *next;
-}*start2,*end2,*newnode2,*temp2;
-struct C
-{
-    int expo,coeff;
-    struct C *next;
-}*start3,*end3,*newnode3,*temp3,*t1,*t2;
-void read_poly(){
-    newnode1 = (struct A *)malloc(sizeof(struct A));
-    int ch;
-    if(start1==NULL)
-    {       
-        do{
-        printf("enter the expo to be inserted : ");
-        scanf("%d",&newnode1->expo);
-        printf("enter the coeff to be inserted : ");
-        scanf("%d",&newnode1->coeff); 
-        start1=newnode1;
-        end1 = newnode1;
-        printf("Node Inserted");
-        printf("do you want to continue : ");
-        scanf("%d",&ch);
-        }while(ch!=0);
-    }
-    else
-    {
-        do{
-        printf("enter the expo to be inserted : ");
-        scanf("%d",&newnode1->expo);
-        printf("enter the coeff to be inserted : ");
-        scanf("%d",&newnode1->coeff); 
-        end1->next = newnode1;
-        end1 =newnode1;
-        printf("Node Inserted");
-        printf("do you want to continue : ");
-        scanf("%d",&ch);
-        }while(ch!=0);
-    }
-
+//Polynomial multiplication
+#include <stdio.h>
+#include <stdlib.h>
+struct node{
+    int coeff,expo;
+    struct node *link;
+}*start1,*start2,*temp1,*temp2,*start3,*temp3,*head,*newNode,*t1,*t2,*X;
+void create1();
+void create2();
+void multiply();
+void create1(){
+    char ch;
+    start1=NULL;
+    int co,ex;
+    do{
+        head=(struct node *)malloc(sizeof(struct node));
+        printf("Enter coeff and expo of the term: ");
+        scanf("%d %d",&co,&ex);
+        head->coeff=co;
+        head->expo=ex;
+        head->link=NULL;
+        if (start1==NULL){
+            start1=head;
+            temp1=head;
+        }
+        else{
+            temp1->link=head;
+            temp1=head;
+        }
+        printf("Want to add more?(y/n): ");
+        scanf("%c",&ch);
+        scanf("%c",&ch);
+    }while (ch=='y');
 }
-void read_poly2(){
-    newnode2 = (struct B *)malloc(sizeof(struct  B));
-    if(start2==NULL)
-    {    start2=newnode2;
-        end2 = newnode2;}
-    else
-    {
-        printf("enter the expo to be inserted : ");
-        scanf("%d",&newnode2->expo);
-        printf("enter the coeff to be inserted : ");
-        scanf("%d",&newnode2->coeff); 
-        end2->next = newnode2;
-        end2 =newnode2;
-        printf("Node Inserted");
-    }
-
+void create2(){
+    char ch;
+    start2=NULL;
+    int co,ex;
+    do{
+        head=(struct node *)malloc(sizeof(struct node));
+        printf("Enter coeff and expo of the term: ");
+        scanf("%d %d",&co,&ex);
+        head->coeff=co;
+        head->expo=ex;
+        head->link=NULL;
+        if (start2==NULL){
+            start2=head;
+            temp2=head;
+        }
+        else{
+            temp2->link=head;
+            temp2=head;
+        }
+        printf("Want to add more?(y/n): ");
+        scanf("%c",&ch);
+        scanf("%c",&ch);
+    }while (ch=='y');
 }
 void multiply(){
-    temp1 = start1;
-    while (temp1 != NULL)
-    {
-        temp2 = start2;
-        while (temp2 != NULL)
-        {
-            int x = temp1->coeff*temp2->coeff;
-            int y = temp1->expo+temp2->expo;
-            newnode3 = (struct C *)malloc(sizeof(struct C));
-            newnode3->coeff = x;
-            newnode3->expo = y;
-            if(start3 == NULL){
-                start3 = newnode3;
-                end3 = newnode3;
-                newnode3->next = NULL;
+    temp1=start1;
+    temp2=start2;
+    start3=NULL;
+    int x,y;
+    while (temp1!=NULL){
+        while (temp2!=NULL){
+            x=temp1->coeff*temp2->coeff;
+            y=temp1->expo+temp2->expo;
+            newNode=(struct node*)malloc(sizeof(struct node));
+            newNode->coeff=x;
+            newNode->expo=y;
+            newNode->link=NULL;
+            if (start3==NULL){
+                start3=newNode;
+                temp3=newNode;
             }
             else{
-                end3->next = newnode3;
-                end3 = newnode3;
-                newnode3->next = NULL;
+                temp3->link=newNode;
+                temp3=newNode;
             }
-
+            temp2=temp2->link;
         }
-        
+        temp1=temp1->link;
+        temp2=start2;
     }
-    temp3 = start3;
-    while (temp3 != NULL)
-    {
-        t1 = temp3;
-        t2= temp3 ->next;
-        while (t2!=NULL)
-        {
-            if (t2->coeff == temp3->coeff)
-            {
-                temp3->coeff = t2->coeff + temp3->coeff;
-                t1->next = t2->next;
-                free(t2);
-                t2= t1->next;
+    temp3=start3;
+    while (temp3!=NULL){
+        t1=temp3;
+        t2=temp3->link;
+        while (t2!=NULL){
+            if (temp3->expo==t2->expo){
+                temp3->coeff=temp3->coeff+t2->coeff;
+                t1->link=t2->link;
+                X=t2;
+                t2=t2->link;
+                free(X);
             }
             else{
-                t1 = t2;
-                t2 = t2->next;
+                t1=t2;
+                t2=t2->link;
             }
-            
         }
-        
+        temp3=temp3->link;
     }
-
-    
-}
-void display(){
-    temp3 = start3;
-    while (temp3 != NULL)
-    {
-        printf("%dX^%d",temp3->coeff,temp3->expo);
-        temp3 = temp3 ->next;
+    printf("First Polynomial\n");
+    temp1=start1;
+    while (temp1->link!=NULL){
+        printf("%dx^%d+",temp1->coeff,temp1->expo);
+        temp1=temp1->link;
     }
-    
-}
+    printf("%dx^%d\n",temp1->coeff,temp1->expo);
+    printf("Second Polynomial\n");
+    temp2=start2;
+    while (temp2->link!=NULL){
+        printf("%dx^%d+",temp2->coeff,temp2->expo);
+        temp2=temp2->link;
+    }
+    printf("%dx^%d\n",temp2->coeff,temp2->expo);
+    printf("Product polynomial\n");
+    temp3=start3;
+    while (temp3->link!=NULL){
+        printf("%dx%d+",temp3->coeff,temp3->expo);
+        temp3=temp3->link;
+    }
+    printf("%dx%d",temp3->coeff,temp3->expo);
+} 
 void main(){
-    read_poly();
-    read_poly2();
+    printf("Enter first polynomial \n");
+    create1();
+    printf("Enter second polynomial \n");
+    create2();
     multiply();
-    display();
 }

@@ -32,7 +32,7 @@ void preorder(struct node *root) //address of root node is passed in t
 {
 if(root!=NULL)
 {
-printf("\n%d",root->data); //visit the root
+printf("\n%d",root->data); //visit the rootw
 preorder(root->left); //preorder traversal on left subtree
 preorder(root->right); //preorder traversal om right subtree
 }

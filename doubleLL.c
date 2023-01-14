@@ -4,7 +4,7 @@ struct node
 {
     int data;
     struct node *prev,*next;
-}*start,*end,*temp,*t,*newnode;
+}*head,*end,*temp,*t,*newnode;
 void insert_begin(){
     int d;
     printf("enter the data to be inserted  : ");
@@ -12,14 +12,14 @@ void insert_begin(){
     newnode = (struct node *)malloc(sizeof(struct node));
     newnode->prev = NULL;
     newnode->data = d;
-    if (start == NULL){
-        start = newnode;
+    if (head == NULL){
+        head = newnode;
         newnode->next = NULL;
     }
     else{
-        newnode->next = start;
-        start->prev = newnode;
-        start = newnode;
+        newnode->next = head;
+        head->prev = newnode;
+        head = newnode;
     }
     printf("Node inserted succesfully..!\n");
 }
@@ -30,12 +30,12 @@ void insert_end(){
     newnode = (struct node *)malloc(sizeof(struct node));
     newnode->next = NULL;
     newnode->data = d;
-    if (start == NULL){
-        start = newnode;
+    if (head == NULL){
+        head = newnode;
         newnode->next = NULL;
     }
     else{
-        temp = start;
+        temp = head;
         while (temp->next != NULL)
         {
             temp = temp->next;
@@ -51,13 +51,13 @@ void insert_specified(){
     scanf("%d",&d);
     printf("enter the data after which the data to be inserted  : ");
     scanf("%d",&d_loc);
-    if(start == NULL){
+    if(head == NULL){
         printf("no element to add in between");
     }
     else{
         newnode = (struct node *)malloc(sizeof(struct node));
         newnode->data= d;
-        temp = start;
+        temp = head;
         while (temp->data != d_loc)
         {
             temp  = temp->next;
@@ -73,7 +73,7 @@ void insert_specified(){
     
 }
 void traverse(){
-    temp = start;
+    temp = head;
     while (temp->next!=NULL)
     {
         printf("%d->",temp->data);
@@ -85,26 +85,26 @@ void traverse(){
 }
 
 void delete_begin(){
-    if (start == NULL)
+    if (head == NULL)
     {
         printf("nothting to delete");
     }
     
     else{
-        temp = start;
-        start = start->next;
-        start->prev = NULL;
+        temp = head;
+        head = head->next;
+        head->prev = NULL;
         free(temp);
         printf("Node deleted successfully...!\n");
     }
 }
 
 void delete_end(){
-    if (start == NULL)
+    if (head == NULL)
     {
         printf("nothting to delete");
     }else{
-        temp =  start;
+        temp =  head;
         while (temp->next!=NULL)
         {
             t=temp;
@@ -122,14 +122,14 @@ void delete_loc(){
     int d_loc;
     printf("enter the data to be deleted  : ");
     scanf("%d",&d_loc);
-    if (d_loc == start->data)
+    if (d_loc == head->data)
     {
         delete_begin();
         printf("Node deleted successfully...!\n");
         return;
     }
     
-    temp = start;
+    temp = head;
     while (temp->data != d_loc)
     {
         temp = temp->next;
