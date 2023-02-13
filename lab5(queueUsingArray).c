@@ -2,21 +2,21 @@
 #define MAX 5
 int q[10],front =-1,rear =-1;
 int isFull(){
-    if(rear == MAX-1)
+    if(rear == MAX-1){
+        printf("queue full .. try deQueueping some elements");
         return 1;
-    else
+    }else
         return 0;
 }
 int isEmpty(){
-    if(front == -1)
+    if(front == -1){
+        printf("queue is empty");
         return 1;
-    else 
+    }else 
         return 0;
 }
 void enQueue(int n){
-    if(isFull())
-        printf("queue full .. try deQueueping some elements");
-    else{
+    if(!isFull()){
         rear++;
         q[rear] =  n;
         if(front == -1)
@@ -24,10 +24,7 @@ void enQueue(int n){
     }
 }
 void deQueue(){
-    if(isEmpty()){
-        printf("nothing here to deQueue");
-    }
-    else{
+    if(!isEmpty()){
         int item = q[front];
         printf("%d is going to be deleted...",item);
         front++;
@@ -38,9 +35,7 @@ void deQueue(){
     }
 }
 void traverse(){
-    if(isEmpty())
-        printf("nothing much to display");
-    else{
+    if(!isEmpty()){
             for (int i = front; i <= rear; i++)
             {
                 printf("%d ",q[i]);
