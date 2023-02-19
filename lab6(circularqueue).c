@@ -60,6 +60,12 @@ void traverse(){
             {
                 printf("%d ",q[i]);
             }
+            for (int i = 0; i !=rear; i= (i+1)%MAX)
+            {
+                printf("%d ",q[i]);
+            }
+            printf("%d ",q[i]);
+            
             
         }
         
