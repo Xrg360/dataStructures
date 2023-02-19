@@ -59,9 +59,13 @@ void insert()
 }
 void insertatf()
 {
-    newnode->link=head;
-    head=newnode;
-    printf("Node Inserted");
+    if(head==NULL)
+        head=newnode;
+    else
+    {
+        newnode->link=head;
+        head=newnode;
+    }
 }
 void insertate()
 {
